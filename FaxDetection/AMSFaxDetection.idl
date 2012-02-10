@@ -1,0 +1,59 @@
+// FaxDetection.idl : type library source for ActiveX Control project.
+
+// This file will be processed by the MIDL compiler tool to
+// produce the type library (FaxDetection.tlb) that will become a resource in
+// FaxDetection.ocx.
+
+#include <olectl.h>
+#include <idispids.h>
+
+[ uuid(9521D099-9240-4F30-8548-B5896741B7AD), version(1.0),
+  helpfile("AMSFaxDetection.hlp"),
+  helpstring("AMS & Fax Detection ActiveX Control Module"),
+  control ]
+library AMSFaxDetectionLib
+{
+	importlib(STDOLE_TLB);
+
+	//  Primary dispatch interface for CFaxDetectionCtrl
+
+	[ uuid(456C0DDE-7D41-4792-ABA4-3A0C805D1A71),
+	  helpstring("Dispatch interface for AMSFaxDetection Control")]
+	dispinterface _DAMSFaxDetection
+	{
+		properties:
+		methods:
+			[id(1), helpstring("Set the ID for the waveIn device")] void SetWaveID(short waveID);
+			[id(2), helpstring("Starts the AMS & Fax detection procedure")] void StartFaxDetection(void);
+			[id(3), helpstring("Stops the AMS & Fax detection procedure")] void StopFaxDetection(void);
+			[id(4), helpstring("Set the control parameters")] void SetControlParameters(LONGLONG lpParameterData);
+	};
+
+	//  Event dispatch interface for CFaxDetectionCtrl
+
+	[ uuid(DCCBC9D2-3B58-4AD6-8B0A-0809FDD91202),
+	  helpstring("Event interface for AMSFaxDetection Control") ]
+	dispinterface _DAMSFaxDetectionEvents
+	{
+		properties:
+			//  Event interface has no properties
+
+		methods:
+			[id(1)] void DetectionStarted(void);
+			[id(2)] void FaxToneDetected(void);
+			[id(3)] void DetectionStopped(void);
+			[id(4)] void AnsweringMachineDetected(void);
+			[id(5)] void HumanDetected(void);
+	};
+
+	//  Class information for CFaxDetectionCtrl
+
+	[ uuid(0F6EE488-6DA4-43D3-AAF0-D75DE93AB0C5),
+	  helpstring("AMS & Fax Detection Control"), control ]
+	coclass AMSFaxDetection
+	{
+		[default] dispinterface _DAMSFaxDetection;
+		[default, source] dispinterface _DAMSFaxDetectionEvents;
+	};
+
+};
